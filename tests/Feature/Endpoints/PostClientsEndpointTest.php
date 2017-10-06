@@ -1,17 +1,9 @@
 <?php
 
-namespace Tests\Feature\ClientsEndpointTests;
+namespace Tests\Feature\Endpoints;
 
-use Invoicing\Models\Client;
-use Invoicing\User;
-use Tests\Feature\EndpointTest;
-
-class PostClientsEndpointTest extends EndpointTest
+class PostClientsEndpointTest extends ClientsEndpointTest
 {
-    protected $base = 'api/clients';
-
-    protected $class = Client::class;
-
     /**
      * @test
      */
@@ -27,11 +19,11 @@ class PostClientsEndpointTest extends EndpointTest
     {
         $client = factory($this->class)->make();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAsNewUser()
             ->json('POST', $this->base, $client->toArray())
             ->assertJson($client->toArray());
 
-        $this->assertDatabaseHas('clients', $client->toArray());
+        $this->assertDatabaseHas($this->table, $client->toArray());
     }
 
     /**

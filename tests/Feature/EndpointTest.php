@@ -15,6 +15,8 @@ abstract class EndpointTest extends TestCase
 
     protected $class;
 
+    protected $table;
+
     /**
      * Create a new resource
      *

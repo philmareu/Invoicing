@@ -1,17 +1,9 @@
 <?php
 
-namespace Tests\Feature\ClientsEndpointTests;
+namespace Tests\Feature\Endpoints;
 
-use Invoicing\Models\Client;
-use Invoicing\User;
-use Tests\Feature\EndpointTest;
-
-class DeleteClientsEndpointTest extends EndpointTest
+class DeleteClientsEndpointTest extends ClientsEndpointTest
 {
-    protected $base = 'api/clients';
-
-    protected $class = Client::class;
-
     /**
      * @test
      */
@@ -25,14 +17,12 @@ class DeleteClientsEndpointTest extends EndpointTest
      */
     public function user_can_delete_a_client()
     {
-        $clients = factory(Client::class, 10)->create();
+        $specimen = $this->createManyReturnRandom($this->class);
 
-        $specimen = $clients->random();
-
-        $this->actingAs(factory(User::class)->create())
-            ->json('DELETE', $this->base . '/' . $specimen->id)
+        $this->actingAsNewUser()
+            ->json('DELETE', implode('/', [$this->base, $specimen->id]))
             ->assertStatus(200);
 
-        $this->assertDatabaseMissing('clients', ['id' => $specimen->id]);
+        $this->assertDatabaseMissing($this->table, ['id' => $specimen->id]);
     }
 }

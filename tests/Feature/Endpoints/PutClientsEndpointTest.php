@@ -3,15 +3,10 @@
 namespace Tests\Feature\ClientsEndpointTests;
 
 use Invoicing\Models\Client;
-use Invoicing\User;
-use Tests\Feature\EndpointTest;
+use Tests\Feature\Endpoints\ClientsEndpointTest;
 
-class PutClientsEndpointTest extends EndpointTest
+class PutClientsEndpointTest extends ClientsEndpointTest
 {
-    protected $base = 'api/clients';
-
-    protected $class = Client::class;
-
     /**
      * @test
      */
@@ -30,7 +25,7 @@ class PutClientsEndpointTest extends EndpointTest
         $specimen = $clients->random();
         $newAttributes = factory(Client::class)->make();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAsNewUser()
             ->json('PUT', $this->base . '/' . $specimen->id, $newAttributes->toArray())
             ->assertJson($newAttributes->toArray());
 
