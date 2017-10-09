@@ -10,7 +10,7 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    // require('bootstrap-sass');
 } catch (e) {}
 
 /**
@@ -36,6 +36,14 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+
+// loads the Icon plugin
+UIkit.use(Icons);
+
+// window.UIkit = require('uikit');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -2,6 +2,7 @@
 
 namespace Invoicing\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use Invoicing\User;
 use Invoicing\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -67,5 +68,26 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Redirect to login form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return redirect('login');
+    }
+
+    /**
+     * Redirect to login form
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        return redirect('login');
     }
 }
