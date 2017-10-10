@@ -16,6 +16,11 @@ class SettingsTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas('settings', [
                 'rate' => null,
+                'timezone' => 'America/Chicago',
+
+
+                'logo' => null,
+                'company' => null,
                 'email' => null,
                 'address_1' => null,
                 'address_2' => null,
@@ -24,9 +29,10 @@ class SettingsTest extends TestCase
                 'zip' => null,
                 'phone' => null,
                 'note' => null,
+
+
                 'stripe_public' => null,
                 'stripe_secret' => null,
-                'timezone' => 'America/Chicago'
             ]);
     }
 }
