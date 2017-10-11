@@ -17,7 +17,7 @@ class DeleteClientsEndpointTest extends ClientsEndpointTest
      */
     public function user_can_delete_a_client()
     {
-        $specimen = $this->createManyReturnRandom($this->class);
+        $specimen = $this->createResource();
 
         $this->actingAsNewUser()
             ->json('DELETE', implode('/', [$this->base, $specimen->id]))

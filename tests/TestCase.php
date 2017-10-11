@@ -29,17 +29,4 @@ abstract class TestCase extends BaseTestCase
     {
         return $this->actingAs($this->createUser());
     }
-
-    /**
-     * Create a given number of resources and return one at random
-     *
-     * @param string $class
-     * @param int $quantity
-     *
-     * @return Model
-     */
-    protected function createManyReturnRandom($class, $quantity = 10)
-    {
-        return factory($class, $quantity)->create()->random();
-    }
 }

@@ -46,4 +46,15 @@ abstract class EndpointTest extends TestCase
     {
         return implode('/', [$this->base, $this->createAndGetResourceId()]);
     }
+
+    /**
+     * Find a resource by the id
+     *
+     * @param int $id
+     * @return Model
+     */
+    protected function findResourceById($id)
+    {
+        return ($this->class)::find($id);
+    }
 }

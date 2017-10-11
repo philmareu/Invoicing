@@ -20,19 +20,33 @@ class PutClientsEndpointTest extends ClientsEndpointTest
      */
     public function user_can_update_a_client()
     {
-        $clients = factory(Client::class, 10)->create();
+        $client = $this->createResource();
 
-        $specimen = $clients->random();
-        $newAttributes = factory(Client::class)->make();
+        $data = [
+            'title' => 'test-' . $client->name,
+            'email' => 'test-' . $client->email,
+            'address_1' => 'test-' . $client->address_1,
+            'address_2' => 'test-' . $client->address_2,
+            'city' => 'test-' . $client->city,
+            'state' => 'XX',
+            'zip' => 'test-' . $client->zip,
+            'phone' => 'test-' . $client->phone
+        ];
 
         $this->actingAsNewUser()
-            ->json('PUT', $this->base . '/' . $specimen->id, $newAttributes->toArray())
-            ->assertJson($newAttributes->toArray());
+            ->json('PUT', $this->base . '/' . $client->id, $data)
+            ->assertJson($data);
 
-        $this->assertArraySubset(
-            $newAttributes->toArray(),
-            Client::find($specimen->id)->toArray()
-        );
+        $client = $this->findResourceById($client->id);
+
+        $this->assertEquals($data['title'], $client->title);
+        $this->assertEquals($data['email'], $client->email);
+        $this->assertEquals($data['address_1'], $client->address_1);
+        $this->assertEquals($data['address_2'], $client->address_2);
+        $this->assertEquals($data['city'], $client->city);
+        $this->assertEquals($data['state'], $client->state);
+        $this->assertEquals($data['zip'], $client->zip);
+        $this->assertEquals($data['phone'], $client->phone);
     }
 
     /**
