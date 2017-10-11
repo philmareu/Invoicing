@@ -4,6 +4,7 @@ namespace Invoicing;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Invoicing\Models\InvoiceSetting;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get invoice settings
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function invoiceSettings()
+    {
+        return $this->hasOne(InvoiceSetting::class);
+    }
 }

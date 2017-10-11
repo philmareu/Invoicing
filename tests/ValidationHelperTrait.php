@@ -19,11 +19,8 @@ trait ValidationHelperTrait
 
     public function validationTest($method, $endpoint, $attribute, $data)
     {
-        $response = $this->actingAs(factory(User::class)->create())
-            ->json($method, $endpoint, $data)
-            ->assertStatus(422);
-
-        $this->assertArrayHasKey('errors', $response->getOriginalContent());
-        $this->assertArrayHasKey($attribute, $response->getOriginalContent()['errors']);
+        $this->actingAs(factory(User::class)->create())
+            ->call($method, $endpoint, $data)
+            ->assertSessionHasErrors($attribute);
     }
 }

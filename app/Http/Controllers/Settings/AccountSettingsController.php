@@ -17,13 +17,13 @@ class AccountSettingsController extends Controller
     public function get()
     {
         return view('settings.account')
-            ->with('user', Auth::user());
+            ->with('user', $this->getAuthenticatedUser());
     }
 
     public function update(UpdateAccountSettingsRequest $request)
     {
         if($request->has('password')) $request->offsetSet('password', bcrypt($request->password));
 
-        Auth::user()->update($request->all());
+        $this->getAuthenticatedUser()->update($request->all());
     }
 }
