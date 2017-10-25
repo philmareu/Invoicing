@@ -2,7 +2,7 @@
 
 namespace Invoicing\Http\Controllers\Endpoints;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Invoicing\Http\Controllers\Controller;
 use Invoicing\Http\Requests\Endpoints\StoreClientEndpointRequest;
 use Invoicing\Http\Requests\Endpoints\StoreClientRequest;

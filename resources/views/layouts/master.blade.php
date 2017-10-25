@@ -14,19 +14,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<div id="app">
+    @yield('content')
+</div>
 
-    <div uk-grid>
-        <div class="uk-width-1-4@s">
-            <ul class="uk-nav">
-                <li><a href="{{ url('') }}">Dashboard</a></li>
-            </ul>
-        </div>
-        <div class="uk-width-3-4@s">
-            @yield('content')
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

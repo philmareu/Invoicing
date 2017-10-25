@@ -43,7 +43,7 @@ import Icons from 'uikit/dist/js/uikit-icons';
 // loads the Icon plugin
 UIkit.use(Icons);
 
-// window.UIkit = require('uikit');
+window.UIkit = require('uikit');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
