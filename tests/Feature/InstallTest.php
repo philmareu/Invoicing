@@ -36,7 +36,15 @@ class InstallTest extends TestCase
     {
         $this->createUser();
 
-        $this->call('POST', 'install')->assertRedirect('login');
+        $data = [
+            'name' => 'Test McTesterson',
+            'email' => 'test@test.com',
+            'password' => 'testing',
+            'timezone' => 'America/Chicago',
+            'company' => 'Test Co.'
+        ];
+
+        $this->call('POST', 'install', $data)->assertRedirect('login');
     }
 
     /**
@@ -56,7 +64,7 @@ class InstallTest extends TestCase
             'name' => 'Test McTesterson',
             'email' => 'test@test.com',
             'password' => 'testing',
-            'timezone' => 'American/Chicago',
+            'timezone' => 'America/Chicago',
             'company' => 'Test Co.'
         ];
 
@@ -74,7 +82,7 @@ class InstallTest extends TestCase
             'name' => 'Test McTesterson',
             'email' => 'test@test.com',
             'password' => 'testing',
-            'timezone' => 'American/Chicago',
+            'timezone' => 'America/Chicago',
             'company' => 'Test Co.'
         ];
 
@@ -92,11 +100,19 @@ class InstallTest extends TestCase
             'name' => 'Test McTesterson',
             'email' => 'test@test.com',
             'password' => 'testing',
-            'timezone' => 'American/Chicago',
+            'timezone' => 'America/Chicago',
             'company' => 'Test Co.'
         ];
 
-        $response = $this->call('POST', 'install', $data)->assertRedirect('/');
+        $this->call('POST', 'install', $data)->assertRedirect('/');
+    }
+
+    /**
+     * @test
+     */
+    public function storing_installation_data_requires_a_name()
+    {
+        $this->postValidationTest('install', 'name');
     }
 
     /**
@@ -104,7 +120,7 @@ class InstallTest extends TestCase
      */
     public function storing_installation_data_requires_an_email()
     {
-
+        $this->postValidationTest('install', 'email');
     }
 
     /**
@@ -112,7 +128,7 @@ class InstallTest extends TestCase
      */
     public function storing_installation_data_requires_a_password()
     {
-
+        $this->postValidationTest('install', 'password');
     }
 
     /**
@@ -120,7 +136,7 @@ class InstallTest extends TestCase
      */
     public function storing_installation_data_requires_a_timezone()
     {
-
+        $this->postValidationTest('install', 'timezone');
     }
 
     /**
@@ -128,7 +144,7 @@ class InstallTest extends TestCase
      */
     public function storing_installation_data_the_email_must_be_valid()
     {
-
+        $this->postValidationTest('install', 'email', ['email' => 'not an email']);
     }
 
     /**
@@ -136,6 +152,6 @@ class InstallTest extends TestCase
      */
     public function storing_installation_data_the_timezone_must_be_valid()
     {
-
+        $this->postValidationTest('install', 'email', ['not a timezone']);
     }
 }

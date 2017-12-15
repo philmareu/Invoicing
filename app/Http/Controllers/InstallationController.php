@@ -4,6 +4,7 @@ namespace Invoicing\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Invoicing\Http\Requests\InstallationRequest;
 use Invoicing\User;
 
 class InstallationController extends Controller
@@ -22,7 +23,7 @@ class InstallationController extends Controller
         return view('install');
     }
 
-    public function install(Request $request)
+    public function install(InstallationRequest $request)
     {
         if (User::all()->count()) return redirect('login');
 
