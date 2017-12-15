@@ -56,12 +56,13 @@ class AccountSettingsTest extends TestCase
         $this->actingAs($user)
             ->call('PUT', 'settings/account', $data);
 
-        $user = User::find($user->id);
+        $this->assertDatabaseHas('users', [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'rate' => $data['rate'],
+            'timezone' => $data['timezone']
+        ]);
 
-        $this->assertEquals($data['name'], $user->name);
-        $this->assertEquals($data['email'], $user->email);
-        $this->assertEquals($data['rate'], $user->rate);
-        $this->assertEquals($data['timezone'], $user->timezone);
         $this->assertTrue(Hash::check($data['password'], $user->password));
     }
 

@@ -9,7 +9,7 @@ $factory->define(Invoicing\Models\Client::class, function (Faker $faker) {
         'address_2' => $faker->streetAddress,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
-        'zip' => (string) $faker->numberBetween(10000, 90000),
+        'zip' => (string) $faker->numberBetween(10000, 99999),
         'phone' => $faker->phoneNumber,
         'email' => $faker->email
     ];

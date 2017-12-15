@@ -21,18 +21,6 @@ class InvoiceSettingsController extends Controller
 
     public function update(UpdateInvoiceSettingsRequest $request)
     {
-        $this->getAuthenticatedUser()->invoiceSettings()->updateOrCreate(array_merge(
-            $request->except('logo'),
-            [
-                'logo' => $this->extractFilenameFromPath($request->file('logo')->store('logos'))
-            ]
-        ));
-    }
-
-    private function extractFilenameFromPath($path)
-    {
-        $segments = explode('/', $path);
-
-        return end($segments);
+        $this->getAuthenticatedUser()->invoiceSettings()->updateOrCreate($request->all());
     }
 }

@@ -52,12 +52,7 @@ class InvoiceSettingsTest extends TestCase
     {
         $user = $this->createUser();
 
-        Storage::fake('logos');
-
-        $logo = UploadedFile::fake()->image('logo.jpg');
-
         $data = [
-            'logo' => $logo,
             'company' => 'Test Co.',
             'email' => 'email@email.com',
             'address_1' => '1234 Street',
@@ -72,16 +67,7 @@ class InvoiceSettingsTest extends TestCase
         $this->actingAs($user)
             ->call('PUT', $this->base, $data);
 
-        $this->assertNotNull($user->invoiceSettings->logo);
-        $this->assertEquals($data['company'], $user->invoiceSettings->company);
-        $this->assertEquals($data['email'], $user->invoiceSettings->email);
-        $this->assertEquals($data['address_1'], $user->invoiceSettings->address_1);
-        $this->assertEquals($data['address_2'], $user->invoiceSettings->address_2);
-        $this->assertEquals($data['city'], $user->invoiceSettings->city);
-        $this->assertEquals($data['state'], $user->invoiceSettings->state);
-        $this->assertEquals($data['zip'], $user->invoiceSettings->zip);
-        $this->assertEquals($data['phone'], $user->invoiceSettings->phone);
-        $this->assertEquals($data['note'], $user->invoiceSettings->note);
+        $this->assertDatabaseHas('invoice_settings', $data);
     }
 
     /**

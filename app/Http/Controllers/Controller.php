@@ -14,8 +14,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
- * @return \Illuminate\Contracts\Auth\Authenticatable|null
- */
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
     protected function getAuthenticatedUser()
     {
         return Auth::user();
